@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LIAMANA HANDMADE – Panos de prato com barrado inglês</title>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+/* Cores como tokens: claro por padrão, escuro conforme o aparelho */
+:root{--bg:#f5f6fa;--card:#fff;--ink:#1d2140;--mute:#626887;--acc:#3a46b0;--on:#fff;--line:#d5d9ee;--fio:#d6403a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12142a;--card:#1b1e3b;--ink:#eceefb;--mute:#a4a9cc;--acc:#8f9bff;--on:#12142a;--line:#34386a;--fio:#ff7a72}}
+:root[data-theme="dark"]{--bg:#12142a;--card:#1b1e3b;--ink:#eceefb;--mute:#a4a9cc;--acc:#8f9bff;--on:#12142a;--line:#34386a;--fio:#ff7a72}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.serif{font-family:"Young Serif",Georgia,serif;font-weight:400}
+.mute{color:var(--mute)}
+.card{background:var(--card);border:1.5px dashed var(--line);border-radius:14px}
+.stitch{border:2px dashed var(--acc);border-radius:18px}
+.btn{background:var(--acc);color:var(--on);border-radius:999px;font-weight:600;padding:.65rem 1.2rem;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.ghost{border:1.5px solid var(--acc);color:var(--acc);border-radius:999px;font-weight:600;padding:.6rem 1.1rem}
+.pill{border:1.5px dashed var(--line);border-radius:999px;padding:.35rem .9rem;font-size:.9rem;white-space:nowrap}
+.pill.on{background:var(--acc);color:var(--on);border:1.5px solid var(--acc)}
+.field{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:.6rem .9rem;color:var(--ink);width:100%}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.layer{position:fixed;z-index:50}
+#drawer{top:0;right:0;bottom:0;width:min(100%,24rem);background:var(--bg);transform:translateX(100%);transition:transform .3s ease;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);display:flex;flex-direction:column;border-left:2px dashed var(--acc)}
+#drawer.open{transform:none}
+.veil{inset:0;background:rgba(10,12,30,.55);opacity:0;pointer-events:none;transition:opacity .3s}
+.veil.open{opacity:1;pointer-events:auto}
+#fs,#contact{inset:0;display:none;background:var(--bg);overflow-y:auto;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#contact{background:rgba(10,12,30,.6);align-items:flex-end;justify-content:center}
+#fs.open{display:block}
+#contact.open{display:flex}
+@media (min-width:640px){#contact{align-items:center}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="sticky z-20 border-b" style="top:env(safe-area-inset-top,0px);background:var(--bg);border-color:var(--line)">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#" class="serif text-xl leading-none">LIAMANA <span class="mute">HANDMADE</span></a>
+    <button id="openCart" class="ghost flex items-center gap-2" aria-label="Abrir pedido">
+      <span data-ic="cart"></span><span>Pedido</span>
+      <span id="count" class="btn !py-0 !px-2 text-sm">0</span>
+    </button>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4">
+  <!-- Apresentação -->
+  <section class="stitch my-6 p-6 md:p-10" style="background:var(--card)">
+    <p class="mute mb-2">Costura artesanal</p>
+    <h1 class="serif text-4xl md:text-6xl leading-tight max-w-2xl">Juntos somos mais fortes</h1>
+    <p class="mt-4 text-lg max-w-xl">Produzimos com paixão. Panos de prato com bordado inglês de alta qualidade, em várias estampas e cores, para deixar sua cozinha mais bonita.</p>
+    <ul class="mt-5 flex flex-wrap gap-2 text-sm">
+      <li class="pill">100% algodão</li><li class="pill">Super absorvente</li><li class="pill">Lavável e durável</li>
+      <li class="pill">Tamanho único 42 × 65 cm</li><li class="pill">R$ 15,00</li>
+    </ul>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="#catalogo" class="btn">Ver os panos</a>
+      <button class="ghost" data-contact>Fale conosco</button>
+    </div>
+  </section>
+
+  <!-- Vitrine: mais acessados -->
+  <section class="mb-8" aria-labelledby="hDest">
+    <h2 id="hDest" class="serif text-2xl mb-1">Mais acessados</h2>
+    <p class="mute mb-3">Os panos que mais clientes abriram. A ordem muda conforme os acessos.</p>
+    <div id="feat" class="flex gap-4 overflow-x-auto pb-3"></div>
+  </section>
+
+  <!-- Catálogo -->
+  <section id="catalogo" class="pb-28">
+    <h2 class="serif text-2xl mb-3">Todos os panos</h2>
+    <div class="grid sm:grid-cols-[1fr_12rem] gap-3 mb-3">
+      <input id="q" class="field" type="search" placeholder="Buscar por nome ou estampa" aria-label="Buscar">
+      <select id="sort" class="field" aria-label="Ordenar">
+        <option value="top">Mais acessados</option><option value="az">Nome de A a Z</option><option value="za">Nome de Z a A</option>
+      </select>
+    </div>
+    <div id="pills" class="flex gap-2 overflow-x-auto pb-3 mb-3"></div>
+    <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    <p id="none" class="hidden card p-6 text-center">Nenhum pano encontrado. Limpe a busca ou escolha outra cor.</p>
+    <p class="mute text-center mt-10">Catálogo atualizado com frequência. Novas estampas e cores chegam o tempo todo.</p>
+  </section>
+</main>
+
+<!-- Botão flutuante -->
+<button class="btn layer shadow-lg flex items-center gap-2" style="right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:40" data-contact><span data-ic="chat"></span>Fale conosco</button>
+
+<!-- Produto em tela cheia -->
+<div id="fs" class="layer" role="dialog" aria-modal="true" aria-label="Detalhe do produto"></div>
+
+<!-- Carrinho -->
+<div id="veil" class="layer veil"></div>
+<aside id="drawer" class="layer" aria-label="Seu pedido">
+  <div class="flex items-center justify-between p-4 border-b" style="border-color:var(--line)">
+    <h2 class="serif text-xl">Seu pedido</h2>
+    <button id="closeCart" aria-label="Fechar pedido" data-ic="x"></button>
+  </div>
+  <div class="flex-1 overflow-y-auto p-4 space-y-4">
+    <div id="items" class="space-y-3"></div>
+    <div id="delivery" class="card p-3 space-y-2 hidden">
+      <h3 class="font-semibold">Endereço para entrega</h3>
+      <input id="cName" class="field" autocomplete="name" placeholder="Seu nome" aria-label="Seu nome">
+      <input id="cStreet" class="field" autocomplete="street-address" placeholder="Rua e número" aria-label="Rua e número">
+      <div class="grid grid-cols-2 gap-2"><input id="cDistrict" class="field" placeholder="Bairro" aria-label="Bairro"><input id="cCity" class="field" autocomplete="address-level2" placeholder="Cidade" aria-label="Cidade"></div>
+      <input id="cRef" class="field" placeholder="Complemento ou ponto de referência (opcional)" aria-label="Complemento ou ponto de referência">
+      <p id="dErr" class="hidden text-sm font-semibold" style="color:var(--fio)">Preencha nome, rua e número, bairro e cidade para a entrega.</p>
+    </div>
+  </div>
+  <div class="p-4 border-t space-y-3" style="border-color:var(--line)">
+    <div class="flex justify-between text-lg font-semibold"><span>Total estimado</span><span id="total">R$ 0,00</span></div>
+    <button id="checkout" class="btn w-full" data-contact>Fale conosco para finalizar</button>
+    <p class="mute text-sm">Preencha o endereço, escolha com qual WhatsApp falar e envie. Pedido e entrega vão prontos na mensagem.</p>
+  </div>
+</aside>
+
+<!-- Fale conosco: duas opções de contato -->
+<div id="contact" class="layer" role="dialog" aria-modal="true" aria-label="Fale conosco">
+  <div class="card w-full max-w-md m-3 p-6" style="border-style:solid">
+    <div class="flex justify-between items-start mb-2">
+      <h2 class="serif text-2xl">Fale conosco</h2>
+      <button id="closeContact" aria-label="Fechar" data-ic="x"></button>
+    </div>
+    <p id="cHint" class="mute mb-4"></p>
+    <div class="space-y-3" id="cLinks"></div>
+  </div>
+</div>
+
+<div id="toast" class="layer btn shadow-lg" style="left:50%;bottom:calc(5rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);opacity:0;pointer-events:none;transition:opacity .2s;z-index:60"></div>
+
+<script>
+/* ============ DADOS ============ */
+// Contatos de WhatsApp (formato internacional: 55 + DDD + número)
+const WA = [
+  { label: "(11) 91342-9666", num: "5511913429666" },
+  { label: "(11) 98821-1750", num: "5511988211750" }
+];
+const PRICE = 15;          // preço único
+const SIZE = "42 × 65 cm"; // tamanho único
+
+// Ilustração do pano (barrado inglês). Para usar foto real, troque o campo img por um data: URI
+function art(a, b, m) {
+  const M = {
+    dots: `<circle cx="20" cy="20" r="6" fill="${a}"/><circle cx="0" cy="0" r="3" fill="${b}"/><circle cx="40" cy="40" r="3" fill="${b}"/>`,
+    check: `<rect width="20" height="20" fill="${b}" opacity=".6"/><rect x="20" y="20" width="20" height="20" fill="${b}" opacity=".6"/>`,
+    stripes: `<rect y="14" width="40" height="8" fill="${a}" opacity=".85"/><rect y="30" width="40" height="4" fill="${b}"/>`,
+    flower: `<g fill="${a}"><circle cx="20" cy="12" r="5"/><circle cx="20" cy="28" r="5"/><circle cx="12" cy="20" r="5"/><circle cx="28" cy="20" r="5"/></g><circle cx="20" cy="20" r="3.5" fill="${b}"/>`
+  };
+  const s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 650"><defs><pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse">${M[m]}</pattern></defs>
+<rect width="420" height="650" fill="#fbf9f4"/><rect x="40" y="120" width="340" height="410" fill="url(#p)"/>
+<g fill="${a}"><rect y="26" width="420" height="14"/><rect y="52" width="420" height="6"/><rect y="68" width="420" height="34"/><rect y="548" width="420" height="34"/><rect y="592" width="420" height="6"/><rect y="610" width="420" height="14"/></g>
+<rect y="108" width="420" height="3" fill="${b}"/><rect y="539" width="420" height="3" fill="${b}"/></svg>`;
+  return "data:image/svg+xml;utf8," + encodeURIComponent(s);
+}
+
+const P = [
+  { id: 1, name: "Cerejeira rosa", color: "Rosa", m: "flower", c: ["#d6336c", "#fbb6ce"], seed: 18, desc: "Flores delicadas em rosa, com barrado inglês bordado." },
+  { id: 2, name: "Xadrez azul", color: "Azul", m: "check", c: ["#1d4ed8", "#93c5fd"], seed: 25, desc: "Xadrez clássico em azul, ótimo para a bancada." },
+  { id: 3, name: "Cerejas vermelhas", color: "Vermelho", m: "dots", c: ["#b91c1c", "#fca5a5"], seed: 30, desc: "Estampa de bolinhas vermelhas com barrado trabalhado." },
+  { id: 4, name: "Girassol amarelo", color: "Amarelo", m: "flower", c: ["#c98a04", "#fde68a"], seed: 12, desc: "Flores amarelas que iluminam qualquer cozinha." },
+  { id: 5, name: "Arco-íris", color: "Misto de cores", m: "stripes", c: ["#7c3aed", "#f59e0b"], seed: 22, desc: "Listras em várias cores, para quem ama colorido." },
+  { id: 6, name: "Listrado marinho", color: "Azul", m: "stripes", c: ["#1e3a8a", "#bfdbfe"], seed: 9, desc: "Listras em azul-marinho, sóbrio e elegante." },
+  { id: 7, name: "Xadrez menta", color: "Verde", m: "check", c: ["#0f766e", "#99f6e4"], seed: 14, desc: "Xadrez em verde menta, leve e fresco." },
+  { id: 8, name: "Folhagem verde", color: "Verde", m: "dots", c: ["#15803d", "#bbf7d0"], seed: 16, desc: "Bolinhas em verde com barrado inglês caprichado." }
+].map(p => ({ ...p, price: PRICE, img: art(p.c[0], p.c[1], p.m) }));
+
+/* ============ ESTADO ============ */
+const $ = s => document.querySelector(s);
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+let cat = "Todos", cart = {}, clicks = {};
+try { clicks = JSON.parse(localStorage.getItem("lm-clicks") || "{}"); } catch (e) {}
+const score = p => p.seed + (clicks[p.id] || 0);
+const bump = id => { clicks[id] = (clicks[id] || 0) + 1; try { localStorage.setItem("lm-clicks", JSON.stringify(clicks)); } catch (e) {} };
+
+const IC = {
+  cart: '<path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>',
+  x: '<path d="M6 6l12 12M18 6 6 18"/>',
+  chat: '<path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.2-4.5A9 9 0 1 1 21 12z"/>'
+};
+const ic = n => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+document.querySelectorAll("[data-ic]").forEach(e => e.innerHTML = ic(e.dataset.ic));
+
+/* ============ RENDER ============ */
+const img = (p, extra = "") => `<img src="${p.img}" alt="Pano de prato ${p.name}, ${p.color}" class="w-full block rounded-lg ${extra}" style="aspect-ratio:42/65;object-fit:cover" loading="lazy">`;
+
+const card = p => `<article class="card p-2 flex flex-col">
+  <button data-open="${p.id}" class="text-left" aria-label="Ver ${p.name} em tela cheia">${img(p)}
+    <h3 class="font-semibold mt-2 px-1">${p.name}</h3>
+    <p class="mute text-sm px-1">${p.color} · ${SIZE}</p></button>
+  <div class="flex items-center justify-between px-1 pt-2 mt-auto">
+    <strong>${brl(p.price)}</strong>
+    <button data-add="${p.id}" class="btn !py-1.5 !px-3 text-sm">Adicionar</button>
+  </div></article>`;
+
+function renderFeat() {
+  const top = [...P].sort((a, b) => score(b) - score(a)).slice(0, 4);
+  $("#feat").innerHTML = top.map(p => `<button data-open="${p.id}" class="card p-2 text-left shrink-0 w-40 sm:w-44" aria-label="Ver ${p.name}">${img(p)}<h3 class="font-semibold mt-2 px-1">${p.name}</h3><p class="mute text-sm px-1">${brl(p.price)}</p></button>`).join("");
+}
+
+function renderPills() {
+  const cats = ["Todos", ...new Set(P.map(p => p.color))];
+  $("#pills").innerHTML = cats.map(c => `<button class="pill ${c === cat ? "on" : ""}" data-cat="${c}">${c}</button>`).join("");
+}
+
+function renderGrid() {
+  const q = $("#q").value.trim().toLowerCase(), s = $("#sort").value;
+  const a = P.filter(p => (cat === "Todos" || p.color === cat) && (p.name + " " + p.desc + " " + p.color).toLowerCase().includes(q));
+  a.sort(s === "az" ? (x, y) => x.name.localeCompare(y.name, "pt") : s === "za" ? (x, y) => y.name.localeCompare(x.name, "pt") : (x, y) => score(y) - score(x));
+  $("#grid").innerHTML = a.map(card).join("");
+  $("#none").classList.toggle("hidden", a.length > 0);
+}
+
+function renderCart() {
+  const rows = Object.entries(cart).map(([id, n]) => ({ p: P.find(p => p.id == id), n }));
+  const total = rows.reduce((t, r) => t + r.p.price * r.n, 0);
+  $("#count").textContent = rows.reduce((t, r) => t + r.n, 0);
+  $("#total").textContent = brl(total);
+  $("#checkout").disabled = !rows.length;
+  $("#delivery").classList.toggle("hidden", !rows.length);
+  $("#checkout").style.opacity = rows.length ? 1 : .5;
+  $("#items").innerHTML = rows.length ? rows.map(({ p, n }) => `<div class="card p-2 flex gap-3 items-center">
+    <img src="${p.img}" alt="" class="rounded" style="width:52px;aspect-ratio:42/65;object-fit:cover">
+    <div class="flex-1"><p class="font-semibold leading-tight">${p.name}</p><p class="mute text-sm">${p.color} · ${brl(p.price)}</p>
+      <div class="flex items-center gap-2 mt-1"><button class="pill !py-0 !px-2" data-dec="${p.id}" aria-label="Diminuir">−</button><span>${n}</span><button class="pill !py-0 !px-2" data-inc="${p.id}" aria-label="Aumentar">+</button>
+      <button class="mute text-sm underline ml-auto" data-rm="${p.id}">Remover</button></div></div></div>`).join("")
+    : `<p class="mute text-center mt-10">Seu pedido está vazio. Toque em “Adicionar” nos panos que você quiser.</p>`;
+}
+
+/* ============ AÇÕES ============ */
+function toast(t) { const e = $("#toast"); e.textContent = t; e.style.opacity = 1; clearTimeout(toast.t); toast.t = setTimeout(() => e.style.opacity = 0, 1600); }
+function add(id, n = 1) { cart[id] = (cart[id] || 0) + n; if (cart[id] <= 0) delete cart[id]; renderCart(); }
+function cartOpen(o) { $("#drawer").classList.toggle("open", o); $("#veil").classList.toggle("open", o); }
+
+function openFs(id) {
+  const p = P.find(p => p.id == id); bump(id);
+  const f = $("#fs");
+  f.innerHTML = `<div class="max-w-5xl mx-auto p-4 md:p-8">
+    <div class="flex justify-end mb-2"><button id="closeFs" class="ghost flex items-center gap-2" aria-label="Fechar">${ic("x")} Fechar</button></div>
+    <div class="grid md:grid-cols-2 gap-6 items-start">
+      <figure class="mx-auto" style="width:min(100%,calc(72vh * 42 / 65))">${img(p, "shadow-lg")}<figcaption class="mute text-center mt-2">Proporção real do pano: ${SIZE}</figcaption></figure>
+      <div><h2 class="serif text-4xl">${p.name}</h2><p class="mute mt-1">${p.color}</p>
+        <p class="serif text-4xl mt-4" style="color:var(--acc)">${brl(p.price)}</p>
+        <p class="mt-4 text-lg">${p.desc}</p>
+        <ul class="mt-4 space-y-1"><li>Tamanho único ${SIZE}</li><li>Bordado inglês de alta qualidade</li><li>100% algodão, super absorvente</li><li>Lavável e durável</li></ul>
+        <div class="mt-6 flex flex-wrap gap-3"><button class="btn" data-add="${p.id}">Adicionar ao pedido</button><button class="ghost" data-contact>Fale conosco</button></div>
+      </div></div></div>`;
+  f.classList.add("open"); f.scrollTop = 0; document.body.style.overflow = "hidden";
+}
+function closeFs() { $("#fs").classList.remove("open"); document.body.style.overflow = ""; renderFeat(); renderGrid(); }
+
+// Endereço de entrega: lê os campos e valida os obrigatórios
+const val = id => $(id).value.trim();
+function validDelivery() {
+  const miss = ["#cName", "#cStreet", "#cDistrict", "#cCity"].find(id => !val(id));
+  $("#dErr").classList.toggle("hidden", !miss);
+  if (miss) $(miss).focus();
+  return !miss;
+}
+
+// Mensagem do pedido enviada ao WhatsApp
+function message() {
+  const rows = Object.entries(cart).map(([id, n]) => ({ p: P.find(p => p.id == id), n }));
+  if (!rows.length) return "Olá, LIAMANA HANDMADE! Gostaria de saber mais sobre os panos de prato.";
+  const total = rows.reduce((t, r) => t + r.p.price * r.n, 0);
+  return "Olá, LIAMANA HANDMADE! Quero fazer este pedido:\n\n" +
+    rows.map(r => `• ${r.n}x ${r.p.name} (${r.p.color}) – ${brl(r.p.price * r.n)}`).join("\n") +
+    `\n\nTotal: ${brl(total)}\n\nEntrega\nNome: ${val("#cName")}\nEndereço: ${[val("#cStreet"), val("#cDistrict"), val("#cCity")].filter(Boolean).join(", ")}\nComplemento: ${val("#cRef")}`;
+}
+function openContact() {
+  const has = Object.keys(cart).length > 0;
+  $("#cHint").textContent = has ? "Escolha com qual WhatsApp você quer falar. Seu pedido já vai pronto na mensagem." : "Escolha um WhatsApp para tirar dúvidas ou fazer seu pedido.";
+  $("#cLinks").innerHTML = WA.map(w => `<a class="btn flex items-center justify-center gap-2" target="_blank" rel="noopener" href="https://wa.me/${w.num}?text=${encodeURIComponent(message())}">${ic("chat")} WhatsApp ${w.label}</a>`).join("");
+  $("#contact").classList.add("open");
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-open],[data-add],[data-inc],[data-dec],[data-rm],[data-cat],[data-contact]");
+  if (e.target.id === "veil") return cartOpen(false);
+  if (e.target.id === "contact") return $("#contact").classList.remove("open");
+  if (!t) return;
+  const d = t.dataset;
+  if ("open" in d) openFs(d.open);
+  else if ("add" in d) { add(d.add); toast("Adicionado ao pedido"); }
+  else if ("inc" in d) add(d.inc);
+  else if ("dec" in d) add(d.dec, -1);
+  else if ("rm" in d) { delete cart[d.rm]; renderCart(); }
+  else if ("cat" in d) { cat = d.cat; renderPills(); renderGrid(); }
+  else if ("contact" in d && !t.disabled) { if (t.id === "checkout" && !validDelivery()) return; openContact(); }
+});
+$("#openCart").onclick = () => cartOpen(true);
+$("#closeCart").onclick = () => cartOpen(false);
+$("#closeContact").onclick = () => $("#contact").classList.remove("open");
+document.addEventListener("click", e => { if (e.target.closest("#closeFs")) closeFs(); });
+$("#q").oninput = renderGrid; $("#sort").onchange = renderGrid;
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if ($("#contact").classList.contains("open")) $("#contact").classList.remove("open");
+  else if ($("#fs").classList.contains("open")) closeFs();
+  else cartOpen(false);
+});
+
+renderFeat(); renderPills(); renderGrid(); renderCart();
+</script>
+</body>
+</html>
